@@ -42,9 +42,10 @@ PIXELFORMATDESCRIPTOR pfd = {
 	0, 0, 0                // layer masks ignored 
 }; 
 
-ATOM				MyRegisterClass(HINSTANCE hInstance);
-BOOL				InitInstance(HINSTANCE, char *str, int x, int y);
-LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
+ATOM                MyRegisterClass(HINSTANCE hInstance);
+BOOL                InitInstance(HINSTANCE, char *str, int x, int y);
+LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
+
 void                DrawOpenGL(int window_id);
 
 int APIENTRY WinMain(HINSTANCE hInstance,
