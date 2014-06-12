@@ -1,13 +1,14 @@
-#include "stdafx.h"
-#include "resource.h"
+#pragma once
+#include <SDKDDKVer.h>
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
 #include <map>
 
 #include <GL/gl.h>
 #include <GL/glu.h>
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
-
-#define MAX_LOADSTRING 100
 
 HINSTANCE hInst;
 
@@ -55,7 +56,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	MSG msg;
-	HACCEL hAccelTable;
 
 	MyRegisterClass(hInstance);
 
@@ -65,13 +65,9 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	InitInstance (hInstance, "window_id=1", window_w, 0);
 	InitInstance (hInstance, "window_id=2", window_w * 2, 0);
 
-	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_OPENGL_MULTI_WINDOW_TEST));
-
 	while (GetMessage(&msg, NULL, 0, 0)) {
-		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) {
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
 	}
 
 	return (int) msg.wParam;
@@ -88,12 +84,12 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 	wcex.cbClsExtra		= 0;
 	wcex.cbWndExtra		= 0;
 	wcex.hInstance		= hInstance;
-	wcex.hIcon			= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_OPENGL_MULTI_WINDOW_TEST));
+	wcex.hIcon			= NULL;
 	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
 	wcex.lpszMenuName	= NULL;
 	wcex.lpszClassName	= "opengl_multi_window_test class";
-	wcex.hIconSm		= LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+	wcex.hIconSm		= NULL;
 
 	return RegisterClassEx(&wcex);
 }
